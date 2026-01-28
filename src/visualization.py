@@ -67,7 +67,7 @@ def plot_results(signals, portfolio, benchmark, ticker, show_ml=True, use_log_sc
         sells['Close'],
         color="red",
         marker="v",
-        s=70,
+        s=60,
         alpha=0.9,
         label="Rule-Based Sell Signal",
         edgecolors="black",
@@ -104,20 +104,23 @@ def plot_results(signals, portfolio, benchmark, ticker, show_ml=True, use_log_sc
 
     # --- ML Confidence Shading ---
     if "ML_Confidence" in signals.columns:
-        ax2.fill_between(
+        ax3 = ax2.twinx()
+        ax3.fill_between(
             signals.index,
             0,
             signals["ML_Confidence"],
-            color="purple",
-            alpha=0.15,
+            color="mediumpurple",
+            alpha=0.3,
             label="ML Confidence"
         )
+    ax3.set_ylim(0,1)
+    ax3.set_ylabel("ML Confidence", fontsize=12)
 
     ax2.set_ylabel("Stock Price ($)", fontsize=12)
-    ax2.legend(loc="upper left", fontsize=10, frameon=True)
+    ax2.legend(loc="upper left", fontsize=10, frameon=True, labelspacing=0.4)
     ax2.set_title(f"Trading Signals on Price Curve - {ticker}", 
                   fontsize=14, fontweight="bold")
-    
+
     plt.tight_layout()
     plt.show()
     return fig, ax1, ax2

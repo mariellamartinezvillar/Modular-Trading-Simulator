@@ -71,7 +71,7 @@ def run_program():
             print("Please enter True or False.")
 
     data = fetch_data(ticker, start_date, end_date)
-    signals = moving_average_strategy(data, show_ml)
+    signals = moving_average_strategy(data, use_ml=show_ml)
     portfolio = backtest(signals)
     benchmark = buy_and_hold(data, signals.index)
 
