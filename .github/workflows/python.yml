@@ -18,4 +18,4 @@ jobs:
           run: pip install -r requirements.txt
         
         - name: Run basic import test
-          run: python -c "import pandas, torch, sklearn"
+          run: python -c "import pandas, numpy, matplotlib, yfinance, sklearn"
